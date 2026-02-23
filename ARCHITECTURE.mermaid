@@ -1,0 +1,42 @@
+mermaid
+graph TD
+    subgraph "FROZEN CORE (Deterministic Pipeline)"
+        P[src/agents/pipeline.ts] -->|Orchestrates| S[Sargas Agent]
+        S -->|Safe/Unsafe| T[Treneris Agent]
+        T -->|Logic/Vector| V[Session Agent]
+        V -->|Blocks| OUT[Master Output]
+    end
+
+    subgraph "CONTENT LAYER (Descriptive)"
+        S -.->|Calls| GS[generateSargasContent]
+        T -.->|Calls| GT[generateTrenerisContent]
+        V -.->|Calls| GSe[generateSessionContent]
+    end
+
+    subgraph "INTELLIGENCE BOUNDARY"
+        GS -->|Consumes| INJ[src/content/injection.ts]
+        GT -->|Consumes| INJ
+        GSe -->|Consumes| INJ
+        
+        INJ -->|Guarded By| CONF[src/config.ts]
+        CONF -->|Proxy Audit| LOG[Console Log]
+        
+        INJ -.->|Returns| NO[NarrativeOutput]
+    end
+
+    subgraph "ENFORCEMENT"
+        NO -->|Implements| CT[src/content/contract.ts]
+        CT -->|Static Assert| COMPILER[Compiler Lock]
+        
+        CONF -.->|If FALSE| NULL[Dead Code / Null]
+        CONF -.->|If TRUE| AI[Intelligence Active]
+    end
+
+    style P fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    style S fill:#e1f5fe,stroke:#01579b
+    style T fill:#e1f5fe,stroke:#01579b
+    style V fill:#e1f5fe,stroke:#01579b
+    
+    style INJ fill:#fff3e0,stroke:#e65100,stroke-width:2px,stroke-dasharray: 5 5
+    style CT fill:#ffebee,stroke:#c62828,stroke-width:2px
+    style COMPILER fill:#ffcdd2,stroke:#c62828

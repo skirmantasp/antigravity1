@@ -1,0 +1,24 @@
+SYSTEM SEAL: ANTIGRAVITY v0.1.0-LOCKED
+
+1. DETERMINISM STATUS: ABSOLUTE.
+   The execution pipeline (Sargas -> Treneris -> Session) is immutable.
+   Control flow logic is permanently decoupled from content generation.
+
+2. INTELLIGENCE ACTIVATION: EXPLICIT.
+   Intelligence is active ONLY when:
+     (SYSTEM_CONFIG.MODE === 'INTELLIGENT') AND
+     (SYSTEM_CONFIG.INTELLIGENCE_ENABLED === true)
+
+3. ENFORCEMENT MECHANISM: COMPILER-GRADE.
+   NarrativeOutput Interface prohibits boolean/numeric return types.
+   Static Type Assertions guarantee build failure on violation.
+   Injection Layer is transparent dead-code in Deterministic Mode.
+
+4. SAFETY GUARANTEE:
+   No generative model holds authority over:
+     - Safety Signals (Red/Yellow/Green)
+     - Training Permissions
+     - Session Structural Integrity
+
+SIGNED: SYSTEM ARCHITECT
+HASH: INTELLIGENCE-SANDBOX-VERIFIED
