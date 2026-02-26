@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { createAthleteProfile } from "./core/athleteProfile.js";
-import { getDecisionResult } from "./core/trainingState.js";
+import { getResultViewModel } from "./getResultViewModel.js";
+import { ResultCard } from "./ui/ResultCard.jsx";
 
 export function App() {
     const [name, setName] = useState("Demo Athlete");
@@ -10,15 +10,10 @@ export function App() {
     const [result, setResult] = useState(null);
 
     function handleRun() {
-        const athlete = createAthleteProfile({
-            name,
-            sport,
-            stable,
-            baseNeeded,
-        });
-
-        const decision = getDecisionResult(athlete);
-        setResult(decision);
+        // Single entry point: raw input → ResultViewModel
+        // No engine internals exposed. No raw results. No config.
+        const vm = getResultViewModel({ name, sport, stable, baseNeeded });
+        setResult(vm);
     }
 
     return (
@@ -83,17 +78,12 @@ export function App() {
                 </button>
             </fieldset>
 
-            {result && (
-                <div style={{ marginTop: "1.5rem" }}>
-                    <h2>Result — {result.state}</h2>
-                    <pre style={preStyle}>
-                        {JSON.stringify(result, null, 2)}
-                    </pre>
-                </div>
-            )}
+            {result && <ResultCard vm={result} />}
         </div>
     );
 }
+
+/* ── Form styles ───────────────────────────────────────────── */
 
 const inputStyle = {
     fontFamily: "monospace",
@@ -118,10 +108,3 @@ const buttonStyle = {
     color: "#fff",
 };
 
-const preStyle = {
-    background: "#1e1e1e",
-    color: "#d4d4d4",
-    padding: "1.5rem",
-    borderRadius: "8px",
-    overflow: "auto",
-};
