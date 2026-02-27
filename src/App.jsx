@@ -1,3 +1,7 @@
+// UI MUST NEVER consume engine result directly.
+// Always use ResultViewModel boundary via getResultViewModel().
+// Do NOT import from ./core/, ./config/, or ./ui/buildResultViewModel.js.
+
 import React, { useState } from "react";
 import { getResultViewModel } from "./getResultViewModel.js";
 import { ResultCard } from "./ui/ResultCard.jsx";

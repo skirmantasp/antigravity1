@@ -3,6 +3,12 @@
  *
  * Pure presentation component — renders a pre-built View Model.
  *
+ * ┌──────────────────────────────────────────────────────┐
+ * │  UI MUST NEVER consume engine result directly.       │
+ * │  Always use ResultViewModel boundary.                │
+ * │  Do NOT import from core/, config/, or engine.       │
+ * └──────────────────────────────────────────────────────┘
+ *
  * BOUNDARY RULES:
  *   - Receives a single `vm` prop (built by buildResultViewModel).
  *   - Reads data from `vm.*` and visuals from `vm.ui.*`.
